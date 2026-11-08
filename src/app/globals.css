@@ -1,0 +1,222 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:where([data-mode=dark], [data-mode=dark] *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-latin), var(--font-dari), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-heading: var(--font-latin), var(--font-dari), ui-sans-serif, system-ui, sans-serif;
+  --color-brand-highlight: var(--brand-highlight);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  /* Secondary card surface (tile / hover backgrounds) and the accent
+   * extras the Settings redesign leans on. The raw --primary-* vars
+   * already exist per-accent below; these mappings expose them (and
+   * --card-2) as Tailwind utilities: bg-card-2, bg-primary-soft,
+   * bg-primary-soft-2, hover:bg-primary-hover. */
+  --color-card-2: var(--card-2);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-soft-2: var(--primary-soft-2);
+  --color-status-good: var(--status-good);
+  --color-status-warning: var(--status-warning);
+  --color-status-serious: var(--status-serious);
+  --color-status-critical: var(--status-critical);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ============================================================
+ * THEMING — brand palette, light + dark
+ *
+ *   MODE   (light / dark) → neutral surfaces, `data-mode` on <html>.
+ *          Light is the default.
+ *   ACCENT (`data-theme`) → the brand colour. There is one brand
+ *          palette ("brand"); the attribute is kept so the boot
+ *          script and the theme hook stay unchanged.
+ *
+ * Palette: deep ink neutrals with a calm teal brand colour and a warm
+ * amber highlight — trustworthy for shops, readable in both scripts.
+ * ============================================================ */
+
+/* ---- MODE: neutral surfaces ---- */
+
+:root,
+html[data-mode="light"] {
+  --background: oklch(0.982 0.004 210);
+  --foreground: oklch(0.235 0.025 245);
+  --card: oklch(1 0 0);
+  --card-2: oklch(0.975 0.005 210);
+  --card-foreground: oklch(0.235 0.025 245);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.235 0.025 245);
+  --secondary: oklch(0.955 0.008 210);
+  --secondary-foreground: oklch(0.28 0.025 245);
+  --muted: oklch(0.958 0.006 210);
+  --muted-foreground: oklch(0.52 0.02 240);
+  --accent: oklch(0.955 0.012 190);
+  --accent-foreground: oklch(0.28 0.03 220);
+  --destructive: oklch(0.58 0.2 27);
+  --border: oklch(0.915 0.008 220);
+  --input: oklch(0.89 0.01 220);
+  --chart-2: oklch(0.78 0.14 75);
+  --chart-3: oklch(0.62 0.09 250);
+  --chart-4: oklch(0.72 0.06 210);
+  --chart-5: oklch(0.85 0.03 210);
+  --radius: 0.75rem;
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.3 0.025 245);
+  --sidebar-accent: oklch(0.955 0.02 185);
+  --sidebar-accent-foreground: oklch(0.3 0.06 190);
+  --sidebar-border: oklch(0.925 0.008 220);
+  --shadow-color: 220 40% 20%;
+  --status-good: #0b7f5a;
+  --status-warning: #9a6400;
+  --status-serious: #c2532a;
+  --status-critical: #c43232;
+}
+
+html[data-mode="dark"] {
+  --background: oklch(0.165 0.016 245);
+  --foreground: oklch(0.96 0.005 220);
+  --card: oklch(0.205 0.018 245);
+  --card-2: oklch(0.225 0.018 245);
+  --card-foreground: oklch(0.96 0.005 220);
+  --popover: oklch(0.215 0.018 245);
+  --popover-foreground: oklch(0.96 0.005 220);
+  --secondary: oklch(0.255 0.018 245);
+  --secondary-foreground: oklch(0.95 0.005 220);
+  --muted: oklch(0.245 0.016 245);
+  --muted-foreground: oklch(0.7 0.015 235);
+  --accent: oklch(0.27 0.03 200);
+  --accent-foreground: oklch(0.95 0.01 200);
+  --destructive: oklch(0.65 0.19 25);
+  --border: oklch(0.3 0.018 245);
+  --input: oklch(0.34 0.018 245);
+  --chart-2: oklch(0.8 0.14 75);
+  --chart-3: oklch(0.7 0.09 250);
+  --chart-4: oklch(0.6 0.05 220);
+  --chart-5: oklch(0.45 0.03 230);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.185 0.017 245);
+  --sidebar-foreground: oklch(0.88 0.01 225);
+  --sidebar-accent: oklch(0.27 0.035 195);
+  --sidebar-accent-foreground: oklch(0.92 0.04 185);
+  --sidebar-border: oklch(0.28 0.018 245);
+  --shadow-color: 230 50% 3%;
+  --status-good: #34c38f;
+  --status-warning: #f5b544;
+  --status-serious: #ec835a;
+  --status-critical: #ef6262;
+}
+
+/* ---- ACCENT: brand colour ---- */
+
+:root,
+html[data-theme="brand"] {
+  --primary: oklch(0.53 0.105 186);
+  --primary-foreground: oklch(0.99 0.005 186);
+  --primary-hover: oklch(0.47 0.1 188);
+  --primary-soft: oklch(0.53 0.105 186 / 0.1);
+  --primary-soft-2: oklch(0.53 0.105 186 / 0.18);
+  --ring: oklch(0.53 0.105 186);
+  --chart-1: oklch(0.53 0.105 186);
+  --sidebar-primary: oklch(0.53 0.105 186);
+  --sidebar-primary-foreground: oklch(0.99 0.005 186);
+  --sidebar-ring: oklch(0.53 0.105 186);
+  --brand-highlight: oklch(0.79 0.15 75);
+}
+
+html[data-mode="dark"][data-theme="brand"] {
+  --primary: oklch(0.72 0.115 182);
+  --primary-foreground: oklch(0.18 0.03 200);
+  --primary-hover: oklch(0.78 0.11 182);
+  --primary-soft: oklch(0.72 0.115 182 / 0.12);
+  --primary-soft-2: oklch(0.72 0.115 182 / 0.2);
+  --ring: oklch(0.72 0.115 182);
+  --chart-1: oklch(0.72 0.115 182);
+  --sidebar-primary: oklch(0.72 0.115 182);
+  --sidebar-primary-foreground: oklch(0.18 0.03 200);
+  --sidebar-ring: oklch(0.72 0.115 182);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  .recharts-cartesian-axis-tick-value {
+    fill: var(--muted-foreground);
+  }
+  html {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Dari reads better a touch larger and with more line height. */
+  html[dir="rtl"] body {
+    line-height: 1.7;
+  }
+  h1, h2, h3 {
+    letter-spacing: -0.01em;
+  }
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3 {
+    letter-spacing: 0;
+  }
+  ::selection {
+    background: var(--primary-soft-2);
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow:
+      0 1px 2px hsl(var(--shadow-color) / 0.06),
+      0 2px 8px hsl(var(--shadow-color) / 0.05);
+  }
+  .shadow-lift {
+    box-shadow:
+      0 2px 4px hsl(var(--shadow-color) / 0.06),
+      0 12px 32px hsl(var(--shadow-color) / 0.1);
+  }
+}
